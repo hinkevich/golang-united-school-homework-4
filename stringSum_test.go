@@ -1,6 +1,7 @@
 package string_sum
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -45,9 +46,9 @@ func TestStringDifferenceValidInput(t *testing.T) {
 }
 func TestStringInvalidInput(t *testing.T) {
 	tests := []testData{
-		{inputString: "3+5+8", want: "", wantError: errorNotTwoOperands},
-		{inputString: "-3+5+6", want: "", wantError: errorNotTwoOperands},
-		{inputString: "", want: "", wantError: errorEmptyInput},
+		{inputString: "3+5+8", want: "", wantError: fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)},
+		{inputString: "-3+5+6", want: "", wantError: fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)},
+		{inputString: "", want: "", wantError: fmt.Errorf("[StringSum] level 1 error: %w", errorEmptyInput)},
 	}
 	for _, test := range tests {
 		got, err := StringSum(test.inputString)
