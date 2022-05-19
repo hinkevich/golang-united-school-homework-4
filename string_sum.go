@@ -32,62 +32,61 @@ func StringSum(input string) (output string, err error) {
 	// Check if input emty
 	if len(input) == 0 {
 		return "", fmt.Errorf("[StringSum] level 1 error: %w", errorEmptyInput)
-		var (
-			subStringsArray     []string
-			numberOne           int
-			numberTwo           int
-			ifNumberOneNegative int
-		)
-		countPlus := strings.Count(input, "+")
+	}
+	var (
+		subStringsArray     []string
+		numberOne           int
+		numberTwo           int
+		ifNumberOneNegative int
+	)
+	countPlus := strings.Count(input, "+")
 
-		// if string include two number and "+"
-		if countPlus > 1 {
+	// if string include two number and "+"
+	if countPlus > 1 {
+		return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+	}
+	if countPlus == 1 {
+		subStringsArray = strings.Split(input, "+")
+		if len(subStringsArray) != 2 {
 			return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 		}
-		if countPlus == 1 {
-			subStringsArray = strings.Split(input, "+")
-			if len(subStringsArray) != 2 {
+		if len(subStringsArray) == 2 {
+			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
+			if err != nil {
 				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 			}
-			if len(subStringsArray) == 2 {
-				numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
-				if err != nil {
-					return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
-				}
-				numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
-				if err != nil {
-					return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
-				}
+			numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
+			if err != nil {
+				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+			}
 
-				return strconv.Itoa(numberOne + numberTwo), nil
+			return strconv.Itoa(numberOne + numberTwo), nil
+		}
+
+	}
+	// chekFirstelement
+	if input[0] == '-' {
+		input = input[1:]
+		ifNumberOneNegative = -1
+	} else {
+		ifNumberOneNegative = 1
+	}
+	countMinus := strings.Count(input, "-")
+
+	if countMinus == 1 || countMinus == 2 {
+		subStringsArray = strings.Split(input, "-")
+		if len(subStringsArray) == 2 {
+			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
+			if err != nil {
+				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+			}
+			numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
+			if err != nil {
+				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 			}
 
 		}
-		// chekFirstelement
-		if input[0] == '-' {
-			input = input[1:]
-			ifNumberOneNegative = -1
-		} else {
-			ifNumberOneNegative = 1
-		}
-		countMinus := strings.Count(input, "-")
-
-		if countMinus == 1 || countMinus == 2 {
-			subStringsArray = strings.Split(input, "-")
-			if len(subStringsArray) == 2 {
-				numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
-				if err != nil {
-					return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
-				}
-				numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
-				if err != nil {
-					return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
-				}
-
-			}
-			return strconv.Itoa(ifNumberOneNegative*numberOne - numberTwo), nil
-		}
-
+		return strconv.Itoa(ifNumberOneNegative*numberOne - numberTwo), nil
 	}
 	return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 }
