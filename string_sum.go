@@ -58,7 +58,7 @@ func StringSum(input string) (output string, err error) {
 			if err != nil {
 				return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
 			}
-			numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
+			numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
 			if err != nil {
 				return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
 			}
