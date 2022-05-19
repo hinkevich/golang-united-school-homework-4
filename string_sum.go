@@ -2,6 +2,8 @@ package string_sum
 
 import (
 	"errors"
+	"strconv"
+	"strings"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -23,5 +25,68 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	return "", nil
+
+	input = strings.TrimSpace(input)
+
+	// Check if input emty
+	if len(input) == 0 {
+		return "", errorEmptyInput
+	}
+	var (
+		subStringsArray     []string
+		numberOne           int
+		numberTwo           int
+		ifNumberOneNegative int
+	)
+	countPlus := strings.Count(input, "+")
+
+	// if string include two number and "+"
+	if countPlus > 1 {
+		return "", errorNotTwoOperands
+	}
+	if countPlus == 1 {
+		subStringsArray = strings.Split(input, "+")
+		if len(subStringsArray) != 2 {
+			return "", errorNotTwoOperands
+		}
+		if len(subStringsArray) == 2 {
+			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
+			if err != nil {
+				return "", errorNotTwoOperands
+			}
+			numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
+			if err != nil {
+				return "", errorNotTwoOperands
+			}
+
+			return strconv.Itoa(numberOne + numberTwo), nil
+		}
+
+	}
+	// chekFirstelement
+	if input[0] == '-' {
+		input = input[1:]
+		ifNumberOneNegative = -1
+	} else {
+		ifNumberOneNegative = 1
+	}
+	countMinus := strings.Count(input, "-")
+
+	if countMinus == 1 || countMinus == 2 {
+		subStringsArray = strings.Split(input, "-")
+		if len(subStringsArray) == 2 {
+			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
+			if err != nil {
+				return "", errorNotTwoOperands
+			}
+			numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
+			if err != nil {
+				return "", errorNotTwoOperands
+			}
+
+		}
+		return strconv.Itoa(ifNumberOneNegative*numberOne - numberTwo), nil
+	}
+
+	return "", errorNotTwoOperands
 }
