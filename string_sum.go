@@ -53,11 +53,11 @@ func StringSum(input string) (output string, err error) {
 		if len(subStringsArray) == 2 {
 			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
 			if err != nil {
-				return "", &strconv.NumError{}
+				return "", err.(*strconv.NumError)
 			}
 			numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
 			if err != nil {
-				return "", &strconv.NumError{}
+				return "", err.(*strconv.NumError)
 			}
 
 			return strconv.Itoa(numberOne + numberTwo), nil
@@ -78,11 +78,11 @@ func StringSum(input string) (output string, err error) {
 		if len(subStringsArray) == 2 {
 			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
 			if err != nil {
-				return "", &strconv.NumError{}
+				return "", err.(*strconv.NumError)
 			}
 			numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
 			if err != nil {
-				return "", &strconv.NumError{}
+				return "", err.(*strconv.NumError)
 			}
 
 		}
