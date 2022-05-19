@@ -47,6 +47,9 @@ func StringSum(input string) (output string, err error) {
 	}
 	if countPlus == 1 {
 		subStringsArray = strings.Split(input, "+")
+		if len(subStringsArray) == 1 {
+			return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
+		}
 		if len(subStringsArray) != 2 {
 			return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 		}
@@ -75,6 +78,9 @@ func StringSum(input string) (output string, err error) {
 
 	if countMinus == 1 || countMinus == 2 {
 		subStringsArray = strings.Split(input, "-")
+		if len(subStringsArray) == 1 {
+			return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
+		}
 		if len(subStringsArray) == 2 {
 			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
 			if err != nil {
@@ -88,5 +94,5 @@ func StringSum(input string) (output string, err error) {
 		}
 		return strconv.Itoa(ifNumberOneNegative*numberOne - numberTwo), nil
 	}
-	return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
+	return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
 }
