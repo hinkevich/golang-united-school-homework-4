@@ -88,5 +88,5 @@ func StringSum(input string) (output string, err error) {
 		}
 		return strconv.Itoa(ifNumberOneNegative*numberOne - numberTwo), nil
 	}
-	return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+	return "", fmt.Errorf("[StringSum] level 1 error: %w", err.(*strconv.NumError))
 }
