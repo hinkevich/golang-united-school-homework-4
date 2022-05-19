@@ -53,11 +53,11 @@ func StringSum(input string) (output string, err error) {
 		if len(subStringsArray) == 2 {
 			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
 			if err != nil {
-				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+				return "", err
 			}
 			numberTwo, _ = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
 			if err != nil {
-				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+				return "", err
 			}
 
 			return strconv.Itoa(numberOne + numberTwo), nil
@@ -78,11 +78,11 @@ func StringSum(input string) (output string, err error) {
 		if len(subStringsArray) == 2 {
 			numberOne, err = strconv.Atoi(strings.TrimSpace(subStringsArray[0]))
 			if err != nil {
-				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+				return "", err
 			}
 			numberTwo, err = strconv.Atoi(strings.TrimSpace(subStringsArray[1]))
 			if err != nil {
-				return "", fmt.Errorf("[StringSum] level 1 error: %w", errorNotTwoOperands)
+				return "", err
 			}
 
 		}
